@@ -46,6 +46,11 @@ class HeaderComponent extends React.Component<RouteComponentProps, State> {
     }
   };
 
+  searchLanguageNameFromLanguageCode = () => {
+    const language = this.state.language;
+    return this.state.languageList.filter((item) => item.code === language)[0].name;
+  };
+
   render() {
     const { history } = this.props;
     return (
@@ -65,7 +70,7 @@ class HeaderComponent extends React.Component<RouteComponentProps, State> {
               }
               icon={<GlobalOutlined />}
             >
-              {this.state.language === "zh" ? "中文" : "English"}
+              {this.searchLanguageNameFromLanguageCode()}
             </Dropdown.Button>
             <Button.Group className={styles["button-group"]}>
               <Button onClick={() => history.push("/register")}>注册</Button>
