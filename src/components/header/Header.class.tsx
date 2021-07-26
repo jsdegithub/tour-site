@@ -17,6 +17,11 @@ class HeaderComponent extends React.Component<RouteComponentProps, State> {
       language: storeState.language,
       languageList: storeState.languageList,
     };
+    store.subscribe(() => {
+      // 这句不能不写
+      const storeState = store.getState();
+      this.setState({ language: storeState.language });
+    });
   }
 
   menuClickHandler = (e) => {
