@@ -16,6 +16,7 @@ const languageReducer = (state = defaultState, action) => {
     const newState = { ...state, language: action.payload };
     return newState;
   }
+  return state;
 };
 
 export default languageReducer;
