@@ -13,15 +13,11 @@ import sideImage2 from "../../assets/images/sider_2019_02-04.png";
 import sideImage3 from "../../assets/images/sider_2019_02-04-2.png";
 import styles from "./HomePage.module.css";
 import { withTranslation, WithTranslation } from "react-i18next";
-import axios from "axios";
 import { connect } from "react-redux";
 import { RootState } from "../../redux/store";
-import { Dispatch } from "redux";
-import {
-  fetchRecommendProductsStartActionCreator,
-  fetchRecommendProductsSuccessActionCreator,
-  fetchRecommendProductsFailActionCreator,
-} from "../../redux/recommendProducts/recommendProductsActions";
+import { giveMeDataActionCreator } from "../../redux/recommendProducts/recommendProductsActions";
+import { ThunkDispatch } from "redux-thunk";
+import { RecommendProductAction } from "../../redux/recommendProducts/recommendProductsActions";
 
 const mapStateToProps = (state: RootState) => {
   return {
@@ -31,16 +27,12 @@ const mapStateToProps = (state: RootState) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<RootState, unknown, RecommendProductAction>
+) => {
   return {
-    fetchStart: () => {
-      dispatch(fetchRecommendProductsStartActionCreator());
-    },
-    fetchSuccess: (data) => {
-      dispatch(fetchRecommendProductsSuccessActionCreator(data));
-    },
-    fetchFail: (error) => {
-      dispatch(fetchRecommendProductsFailActionCreator(error));
+    giveMeData: () => {
+      dispatch(giveMeDataActionCreator());
     },
   };
 };
@@ -50,16 +42,8 @@ class HomePageComponent extends React.Component<
     ReturnType<typeof mapStateToProps> &
     ReturnType<typeof mapDispatchToProps>
 > {
-  async componentDidMount() {
-    this.props.fetchStart();
-    try {
-      const { data } = await axios.get(
-        "http://123.56.149.216:8080/api/productCollections"
-      );
-      this.props.fetchSuccess(data);
-    } catch (error) {
-      this.props.fetchFail(error.message);
-    }
+  componentDidMount() {
+    this.props.giveMeData();
   }
 
   render() {
