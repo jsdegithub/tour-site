@@ -3,12 +3,14 @@ import recommendProductsReducer from "./recommendProducts/recommendProductsReduc
 import { actionLog } from "./middlewares/actionLog";
 import { changeLanguage } from "./middlewares/changeLanguage";
 import { productDetailSlice } from "./productDetail/slice";
+import { productSearchSlice } from "./productSearch/slice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
   language: languageReducer,
   recommendProducts: recommendProductsReducer,
   productDetail: productDetailSlice.reducer,
+  searchProduct: productSearchSlice.reducer,
 });
 
 const store = configureStore({
