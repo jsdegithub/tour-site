@@ -34,16 +34,9 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    fetchStart: (state) => {
-      state.loading = true;
-    },
-    fetchSuccess: (state, action) => {
-      state.token = action.payload;
-      state.loading = false;
+    logOut: (state) => {
+      state.token = null;
       state.error = null;
-    },
-    fetchFail: (state, action: PayloadAction<string | null>) => {
-      state.error = action.payload;
       state.loading = false;
     },
   },
