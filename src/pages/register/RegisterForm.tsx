@@ -1,10 +1,23 @@
 import { Form, Input, Button, Checkbox } from "antd";
 import React from "react";
 import styles from "./RegisterForm.module.css";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 export const RegisterForm: React.FC = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const history = useHistory();
+
+  const onFinish = async (values) => {
+    try {
+      await axios.post("http://123.56.149.216:8080/auth/register", {
+        email: values.username,
+        password: values.password,
+        confirmPassword: values.confirm,
+      });
+      history.push("/signIn");
+    } catch (e) {
+      alert(`注册失败：e.message`);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
