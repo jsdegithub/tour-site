@@ -1,41 +1,42 @@
 import { Form, Input, Button, Checkbox } from "antd";
-import React from "react";
 import styles from "./RegisterForm.module.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-export const RegisterForm: React.FC = () => {
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+const tailLayout = {
+  wrapperCol: { offset: 8, span: 16 },
+};
+
+export const RegisterForm = () => {
   const history = useHistory();
 
-  const onFinish = async (values) => {
+  const onFinish = async (values: any) => {
+    console.log("Success:", values);
     try {
       await axios.post("http://123.56.149.216:8080/auth/register", {
         email: values.username,
         password: values.password,
         confirmPassword: values.confirm,
       });
-      history.push("/signIn");
-    } catch (e) {
-      alert(`注册失败：e.message`);
+      history.push("/signIn/");
+    } catch (error) {
+      alert(`注册失败：${error.message}`);
     }
   };
 
-  const onFinishFailed = (errorInfo) => {
+  const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
 
   return (
     <Form
+      {...layout}
       name="basic"
-      labelCol={{
-        span: 8,
-      }}
-      wrapperCol={{
-        span: 16,
-      }}
-      initialValues={{
-        remember: true,
-      }}
+      initialValues={{ remember: true }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       className={styles["register-form"]}
@@ -43,12 +44,7 @@ export const RegisterForm: React.FC = () => {
       <Form.Item
         label="Username"
         name="username"
-        rules={[
-          {
-            required: true,
-            message: "Please input your username!",
-          },
-        ]}
+        rules={[{ required: true, message: "Please input your username!" }]}
       >
         <Input />
       </Form.Item>
@@ -56,12 +52,7 @@ export const RegisterForm: React.FC = () => {
       <Form.Item
         label="Password"
         name="password"
-        rules={[
-          {
-            required: true,
-            message: "Please input your password!",
-          },
-        ]}
+        rules={[{ required: true, message: "Please input your password!" }]}
       >
         <Input.Password />
       </Form.Item>
@@ -71,10 +62,7 @@ export const RegisterForm: React.FC = () => {
         name="confirm"
         hasFeedback
         rules={[
-          {
-            required: true,
-            message: "Please confirm your password!",
-          },
+          { required: true, message: "Please input your confirm password!" },
           ({ getFieldValue }) => ({
             validator(_, value) {
               if (!value || getFieldValue("password") === value) {
@@ -88,25 +76,13 @@ export const RegisterForm: React.FC = () => {
         <Input.Password />
       </Form.Item>
 
-      <Form.Item
-        name="remember"
-        valuePropName="checked"
-        wrapperCol={{
-          offset: 8,
-          span: 16,
-        }}
-      >
+      <Form.Item {...tailLayout} name="remember" valuePropName="checked">
         <Checkbox>Remember me</Checkbox>
       </Form.Item>
 
-      <Form.Item
-        wrapperCol={{
-          offset: 8,
-          span: 16,
-        }}
-      >
+      <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
-          注册账号
+          点击注册
         </Button>
       </Form.Item>
     </Form>
