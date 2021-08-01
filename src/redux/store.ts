@@ -6,6 +6,14 @@ import { productDetailSlice } from "./productDetail/slice";
 import { productSearchSlice } from "./productSearch/slice";
 import { userSlice } from "./user/slice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["user"],
+};
 
 const rootReducer = combineReducers({
   language: languageReducer,
@@ -15,8 +23,10 @@ const rootReducer = combineReducers({
   user: userSlice.reducer,
 });
 
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware(),
     actionLog,
@@ -25,6 +35,8 @@ const store = configureStore({
   devTools: true,
 });
 
+const persistedStore = persistStore(store);
+
 export type RootState = ReturnType<typeof store.getState>;
 
-export default store;
+export default { store, persistedStore };

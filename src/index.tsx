@@ -5,15 +5,18 @@ import "./index.css";
 import App from "./App";
 import "./i18n/config";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import rootStore from "./redux/store";
 import axios from "axios";
+import { PersistGate } from "redux-persist/integration/react";
 
 axios.defaults.headers["x-icode"] = "E91174BD05EF4D98";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
+    <Provider store={rootStore.store}>
+      <PersistGate persistor={rootStore.persistedStore}>
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
