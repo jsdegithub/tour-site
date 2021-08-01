@@ -1,9 +1,32 @@
 import { Form, Input, Button, Checkbox } from "antd";
 import styles from "./SignInForm.module.css";
+import { signIn } from "../../redux/user/slice";
+import { useDispatch } from "react-redux";
+import { useSelector } from "../../redux/hooks";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 export const SignInForm = () => {
+  const loading = useSelector((state) => state.user.loading);
+  const error = useSelector((state) => state.user.error);
+  const jwt = useSelector((state) => state.user.token);
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  useEffect(() => {
+    if (jwt !== null) {
+      history.push("/");
+    }
+  }, [jwt]);
+
   const onFinish = (values: any) => {
-    console.log("Success:", values);
+    dispatch(
+      signIn({
+        email: values.username,
+        password: values.password,
+      })
+    );
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -45,7 +68,7 @@ export const SignInForm = () => {
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" loading={loading}>
           点击登录
         </Button>
       </Form.Item>

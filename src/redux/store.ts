@@ -4,6 +4,7 @@ import { actionLog } from "./middlewares/actionLog";
 import { changeLanguage } from "./middlewares/changeLanguage";
 import { productDetailSlice } from "./productDetail/slice";
 import { productSearchSlice } from "./productSearch/slice";
+import { userSlice } from "./user/slice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   recommendProducts: recommendProductsReducer,
   productDetail: productDetailSlice.reducer,
   searchProduct: productSearchSlice.reducer,
+  user: userSlice.reducer,
 });
 
 const store = configureStore({
