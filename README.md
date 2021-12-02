@@ -6,23 +6,23 @@
 Docker+阿里云ECS，使用Dockerfile制作镜像，推送到阿里云镜像仓库，再从服务器拉取镜像，部署到服务器上。
 
 ### 优化方案：
-(1)lazy+Suspense路由懒加载，大大减少了白屏时间（路由系统放在App.js中）；
+1、lazy+Suspense路由懒加载，大大减少了白屏时间（路由系统放在App.js中）；
 
-(2)TreeShaking去除引用库中没有使用的代码，减少了白屏时间和首屏加载时间；
+2、TreeShaking去除引用库中没有使用的代码，减少了白屏时间和首屏加载时间；
 
-(3)CodeSplitting代码分割，减少了白屏时间和首屏加载时间；
+3、CodeSplitting代码分割，减少了白屏时间和首屏加载时间；
 
-(4)全站图片懒加载，大大减少了各组件加载时间（使用了react-lazyload-image-component）；
+4、全站图片懒加载，大大减少了各组件加载时间（使用了react-lazyload-image-component）；
 
-(5)TinyPNG本地图片压缩，减少了首屏加载时间；
+5、TinyPNG本地图片压缩，减少了首屏加载时间；
 
-(6)最大化压缩了index.js和App.js的体积，大大缩短了白屏时间；
+6、最大化压缩了index.js和App.js的体积，大大缩短了白屏时间；
 
-(7)React.memo+useMemo+useCallback子组件性能优化；
+7、React.memo+useMemo+useCallback子组件性能优化；
 
-(8)经测试，白屏时间:0.7s，TimeToInteractive:1.8s，DOMContentLoaded:3s，首屏完全加载时间8s；
+8、经测试，白屏时间:0.7s，TimeToInteractive:1.8s，DOMContentLoaded:3s，首屏完全加载时间8s；
 
-(9)服务器图片资源未经压缩，对首屏加载速度影响较大。
+9、服务器图片资源未经压缩，对首屏加载速度影响较大。
 
 ### 项目功能点和难点
 一、redux全局状态管理
