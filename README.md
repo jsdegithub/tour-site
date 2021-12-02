@@ -1,6 +1,6 @@
 ## 项目演示：[点击链接查看项目演示](http://tour.aeeternity.com/)（不要使用代理访问网站，否则会被拦截）
 
-### 技术栈： React+Hook+Typescript+Antd+ReactRouter+Redux+ReduxToolkit
+### 技术栈： React+Hook+Typescript+Antd+ReactRouter+Redux+React-redux+ReduxToolkit
 
 ### 部署方案：
 Docker+阿里云ECS，使用Dockerfile制作镜像，推送到阿里云镜像仓库，再从服务器拉取镜像，部署到服务器上。
