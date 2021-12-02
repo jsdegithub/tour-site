@@ -2,10 +2,10 @@
 
 ### 技术栈： React+Hook+Typescript+Antd+ReactRouter+Redux+React-redux+ReduxToolkit
 
-### 部署方案
+### 部署方案：
 Docker+阿里云ECS，使用Dockerfile制作镜像，推送到阿里云镜像仓库，再从服务器拉取镜像，部署到服务器上。
 
-### 优化方案
+### 优化方案：
 1、lazy+Suspense路由懒加载，大大减少了白屏时间（路由系统放在App.js中）；
 
 2、TreeShaking去除引用库中没有使用的代码，减少了白屏时间和首屏加载时间；
@@ -24,7 +24,7 @@ Docker+阿里云ECS，使用Dockerfile制作镜像，推送到阿里云镜像仓
 
 9、服务器图片资源未经压缩，对首屏加载速度影响较大。
 
-### 项目功能点和难点
+### 项目功能点和难点：
 一、redux全局状态管理
 
 1、引入了react-redux更方便地获取store state和dispatch，同时避免了在组件中订阅store；
