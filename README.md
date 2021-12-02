@@ -12,7 +12,7 @@ Docker+阿里云ECS，使用Dockerfile制作镜像，推送到阿里云镜像仓
 
 3、CodeSplitting代码分割，减少了白屏时间和首屏加载时间；
 
-4、全站图片懒加载，大大减少了各组件加载时间（使用了react-lazyload-image-component）；
+4、全站图片懒加载，大大减少了各组件加载时间（使用了react-lazy-load-image-component）；
 
 5、TinyPNG本地图片压缩，减少了首屏加载时间；
 
